@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../OFReader/.idea/OFReader.iml" filepath="$PROJECT_DIR$/../OFReader/.idea/OFReader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/OFReader.iml" filepath="$PROJECT_DIR$/.idea/OFReader.iml" />
     </modules>
   </component>
 </project>
