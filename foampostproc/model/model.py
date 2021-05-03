@@ -3,7 +3,7 @@ from typing import List
 
 
 class Point:
-    def __init__(self, x: int, y: int, z: int):
+    def __init__(self, x: float, y: float, z: float):
         self._x = x
         self._y = y
         self._z = z
@@ -25,11 +25,13 @@ class Point:
 
 
 class CameraProps:
-    def __init__(self, idn: int, focal_point: Point, cam_position: Point, angles: Point):
+    def __init__(self, idn: int, focal_point: Point, cam_position: Point, viewangle: int, viewup: Point, pp: bool):
         self._idn = idn
         self._focal_point = focal_point
         self._cam_position = cam_position
-        self._angles = angles
+        self._viewup = viewup
+        self._viewangle = viewangle
+        self._parallel_projection = pp
 
     @property
     def idn(self) -> int:
@@ -44,8 +46,16 @@ class CameraProps:
         return self._cam_position
 
     @property
-    def angels(self) -> Point:
-        return self._angles
+    def viewup(self) -> Point:
+        return self._viewup
+
+    @property
+    def viewangle(self):
+        return self._viewangle
+
+    @property
+    def parallel_projection(self):
+        return self._parallel_projection
 
 
 class CameraSlice(object):

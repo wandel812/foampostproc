@@ -28,7 +28,9 @@ class Mapper:
 
     @classmethod
     def map_camera_props_dto(cls, c: CameraPropsDTO) -> CameraProps:
-        return CameraProps(c.idn,
+        return CameraProps(c. idn,
                            cls.map_point_dto(c.focal_point),
                            cls.map_point_dto(c.cam_position),
-                           cls.map_point_dto(c.angles))
+                           c.viewangle,
+                           cls.map_point_dto(c.viewup),
+                           c.pp)

@@ -13,15 +13,17 @@
         "z": 0
       },
       "cam_position": {
+        "x": -0.249,
+        "y": -0.102,
+        "z": 0.343
+      },
+      "viewangle": 30,
+      "viewup": {
         "x": 0,
-        "y": 0,
+        "y": 1,
         "z": 0
       },
-      "angles": {
-        "x": 0,
-        "y": 0,
-        "z": 0
-      }
+      "pp": false
     },
     {
       "idn": 1,
@@ -32,14 +34,76 @@
       },
       "cam_position": {
         "x": 1,
-        "y": 1,
+        "y": 100,
         "z": 1
       },
-      "angles": {
+      "viewangle": 30,
+      "viewup": {
+        "x": 0,
+        "y": 150,
+        "z": 1
+      },
+      "pp": false
+    },
+    {
+      "idn": 2,
+      "focal_point": {
         "x": 1,
         "y": 1,
         "z": 1
-      }
+      },
+      "cam_position": {
+        "x": 1,
+        "y": 200,
+        "z": 1
+      },
+      "viewangle": 90,
+      "viewup": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "pp": false
+    },
+    {
+      "idn": 3,
+      "focal_point": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "cam_position": {
+        "x": 1,
+        "y": 300,
+        "z": 1
+      },
+      "viewangle": 90,
+      "viewup": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "pp": false
+    },
+    {
+      "idn": 4,
+      "focal_point": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "cam_position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "viewangle": 90,
+      "viewup": {
+        "x": 0,
+        "y": 0,
+        "z": 1
+      },
+      "pp": false
     }
   ],
   "sls": [

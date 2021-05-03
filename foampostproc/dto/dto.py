@@ -33,7 +33,7 @@ class FoamCasesPathDTO(object):
 
 
 class PointDTO(object):
-    def __init__(self, x: int, y: int, z: int):
+    def __init__(self, x: float, y: float, z: float):
         self.x = x
         self.y = y
         self.z = z
@@ -48,11 +48,14 @@ class PointDTO(object):
 
 
 class CameraPropsDTO(object):
-    def __init__(self, idn: int, focal_point: PointDTO, cam_position: PointDTO, angles: PointDTO):
+    def __init__(self, idn: int, focal_point: PointDTO, cam_position: PointDTO, viewangle: int, viewup: PointDTO,
+                 pp: bool):
         self.idn = idn
         self.focal_point = focal_point
         self.cam_position = cam_position
-        self.angles = angles
+        self.viewangle = viewangle
+        self.viewup = viewup
+        self.pp = pp
 
     @staticmethod
     def parse(d: Dict) -> Optional['CameraPropsDTO']:
