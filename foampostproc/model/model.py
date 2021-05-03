@@ -1,10 +1,9 @@
-from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import List
 
 
 class Point:
-    def __init__(self, x:int, y:int, z:int):
+    def __init__(self, x: int, y: int, z: int):
         self._x = x
         self._y = y
         self._z = z
@@ -26,15 +25,15 @@ class Point:
 
 
 class CameraProps:
-    def __init__(self, id_: int, focal_point: Point, cam_position: Point, angles: Point):
-        self._id = id_
+    def __init__(self, idn: int, focal_point: Point, cam_position: Point, angles: Point):
+        self._idn = idn
         self._focal_point = focal_point
         self._cam_position = cam_position
         self._angles = angles
 
     @property
-    def id_(self) -> int:
-        return self._id
+    def idn(self) -> int:
+        return self._idn
 
     @property
     def focal_point(self) -> Point:
@@ -49,43 +48,48 @@ class CameraProps:
         return self._angles
 
 
-class CameraSlice:
-    def __int__(self, cam_prop_id: int, slice_: Point):
+class CameraSlice(object):
+    def __init__(self, cam_prop_id: int, sl: Point):
         self._cam_prop_id = cam_prop_id
-        self._slice = slice_
+        self._sl = sl
 
     @property
     def cam_prop_id(self) -> int:
         return self._cam_prop_id
 
     @property
-    def slice_(self):
-        return self.slice_
+    def sl(self):
+        return self._sl
 
 
-class ICaseLike(ABC):
-    @abstractmethod
+class CaseDir(object):
+    def __init__(self, idn: int, path: str):
+        self._idn = idn
+        self._path = Path(path)
+
     @property
-    def case_path(self) -> Path: pass
+    def idn(self):
+        return self._idn
 
-    @abstractmethod
     @property
-    def cam_prop_list(self) -> List[CameraProps]: pass
-
-    @abstractmethod
-    @property
-    def slice_list(self) -> List[CameraSlice]: pass
+    def path(self):
+        return self._path
 
 
-class FoamCase(ICaseLike):
-    def __init__(self, case_path: Path, cam_prop_list: List[CameraProps], slice_list: List[CameraSlice]):
-        self._case_path = case_path
+class FoamCase(object):
+    def __init__(self, idn: int, cases_dir_path: CaseDir, cam_prop_list: List[CameraProps], slice_list: List[CameraSlice]):
+        self._idn = idn
+        self._cases_dir_path = cases_dir_path
         self._cam_prop_list = cam_prop_list
         self._slice_list = slice_list
 
     @property
-    def case_path(self) -> Path:
-        return self._case_path
+    def idn(self) -> int:
+        return self._idn
+
+    @property
+    def cases_dir_path(self) -> CaseDir:
+        return self._cases_dir_path
 
     @property
     def cam_prop_list(self) -> List[CameraProps]:
@@ -94,6 +98,3 @@ class FoamCase(ICaseLike):
     @property
     def slice_list(self) -> List[CameraSlice]:
         return self._slice_list
-
-
-

@@ -1,10 +1,9 @@
-from collections import Callable
 from pathlib import Path
-from plistlib import Dict
 from typing import Any
 from ntpath import split
 from os import makedirs
-from json import dumps
+from json import dumps, load
+from paraview.simple import *
 
 
 class FileHandling:
@@ -21,16 +20,23 @@ class FileHandling:
             out.write(json_string)
 
     @classmethod
-    def read_json(cls, inp: Path, object_hook_: Callable[[Dict], Any]) -> Any:
-        from json import load
-
+    def read_json(cls, inp: Path, object_hook_=None) -> Any:
         with open(inp, "r") as fin:
             data = load(fin, object_hook=object_hook_)
 
         return data
 
     @classmethod
-    def write_file(cls, file_path: Path, text: str, mode: str = 'w'):
+    def read_foamcase(cls, inp: Path):
+        foamcase_path = inp / "temp.foam"
+        cls.write_file(foamcase_path)
+        foamcase = OpenFOAMReader(FileName=str(foamcase_path))
+        Path.unlink(foamcase_path)
+        return foamcase
+
+
+    @classmethod
+    def write_file(cls, file_path: Path, text: str = "", mode: str = 'w'):
         dir_path = file_path.parent
         dir_path.mkdir(parents=True, exist_ok=True)
         with open(file_path, mode) as out:
