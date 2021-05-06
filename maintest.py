@@ -53,7 +53,15 @@ def test1():
     display.Visibility = 1
     Render(view)
 
+from pymongo import MongoClient
+
 if __name__ == '__main__':
-    test()
+    # test()
+    login = "dbUser"
+    password = "a4eYAyhZ4xgXEre"
+    db_proj_name = "foampostproc"
+    db_connect_link = f"mongodb+srv://{login}:{password}@cluster0.ecqqe.mongodb.net/{db_proj_name}?retryWrites=true&w=majority"
+    cluster = MongoClient(db_connect_link)
+    db =cluster[]
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

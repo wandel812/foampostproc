@@ -67,9 +67,11 @@ class CameraPropsDTO(object):
 
 
 class SliceDTO(object):
-    def __init__(self, idn: int, sl: PointDTO):
+    def __init__(self, idn: int, sl_x: PointDTO = None, sl_y: PointDTO = None, sl_z: PointDTO = None):
         self.idn = idn
-        self.sl = sl
+        self.sl_x = sl_x
+        self.sl_y = sl_y
+        self.sl_z = sl_z
 
     @staticmethod
     def parse(d: Dict) -> Optional['SliceDTO']:

@@ -24,7 +24,10 @@ class Mapper:
 
     @classmethod
     def map_slice_dto(cls, s: SliceDTO) -> CameraSlice:
-        return CameraSlice(s.idn, cls.map_point_dto(s.sl))
+        sl_x = None if s.sl_x is None else cls.map_point_dto(s.sl_x)
+        sl_y = None if s.sl_y is None else cls.map_point_dto(s.sl_y)
+        sl_z = None if s.sl_z is None else cls.map_point_dto(s.sl_z)
+        return CameraSlice(s.idn, sl_x, sl_y, sl_z)
 
     @classmethod
     def map_camera_props_dto(cls, c: CameraPropsDTO) -> CameraProps:

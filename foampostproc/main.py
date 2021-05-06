@@ -19,7 +19,7 @@ if __name__ == "__main__":
 
     case = Mapper.map_foam_case_dto(case_dto)
 
-    foamcase_path = case.cases_dir_path.path
+    foamcase_path = case.case_dir.path
     foamcase = FileHandling.read_foamcase(foamcase_path)
     foamcase.MeshRegions = ['internalMesh']
     servermanager.Fetch(foamcase)
@@ -30,7 +30,6 @@ if __name__ == "__main__":
         camera.SetFocalPoint(cam_prop.focal_point.x, cam_prop.focal_point.y, cam_prop.focal_point.z)
         camera.SetPosition(cam_prop.cam_position.x, cam_prop.cam_position.y, cam_prop.cam_position.z)
         camera.SetViewUp(cam_prop.viewup.x, cam_prop.viewup.y, cam_prop.viewup.z)
-        camera.SetParallelProjection(cam_prop.parallel_projection)
         for j, sl in enumerate(case.slice_list):
             Show(foamcase, view)
             # Render(view)
