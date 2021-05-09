@@ -3,15 +3,15 @@ from pathlib import Path
 from paraview.simple import *
 
 import foampostproc.dto.dto as dto
-from foampostproc.file import FileHandling
-from modelmapper import Mapper
+from foampostproc.utils import FileHandling
+from foampostproc.dto.modelmapper import Mapper
 
 # TODO ADD SLICE TYPE ??
 # https://docs.paraview.org/en/v5.8.1/UsersGuide/displayingData.html?highlight=slice#slice-view
 
 SRC_DIR = Path(dirname(abspath(__file__)))
 PROJ_DIR = SRC_DIR.parent
-OTP_DIR = PROJ_DIR / "otp"
+OTP_DIR = PROJ_DIR / "screenshot_otp"
 
 if __name__ == "__main__":
     case_dto = FileHandling.read_json(PROJ_DIR / "config/conf.json",
@@ -34,3 +34,4 @@ if __name__ == "__main__":
             Show(foamcase, view)
             # Render(view)
             SaveScreenshot(str(OTP_DIR / f"view-{i}-{j}.png"), view)
+

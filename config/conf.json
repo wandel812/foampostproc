@@ -1,12 +1,12 @@
 {
-  "idn": 0,
+  "_id": 0,
   "cases_dir": {
-    "idn": 0,
-    "case_path": "/home/dm/openfoam/case0/"
+    "_id": 0,
+    "cases_path": "/home/dm/openfoam/case0/"
   },
   "camera_props": [
     {
-      "idn": 0,
+      "_id": 0,
       "focal_point": {
         "x": 0,
         "y": 0,
@@ -22,11 +22,10 @@
         "x": 0,
         "y": 1,
         "z": 0
-      },
-      "pp": false
+      }
     },
     {
-      "idn": 1,
+      "_id": 1,
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -42,11 +41,10 @@
         "x": 0,
         "y": 150,
         "z": 1
-      },
-      "pp": false
+      }
     },
     {
-      "idn": 2,
+      "_id": 2,
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -62,11 +60,10 @@
         "x": 0,
         "y": 0,
         "z": 1
-      },
-      "pp": false
+      }
     },
     {
-      "idn": 3,
+      "_id": 3,
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -82,11 +79,10 @@
         "x": 0,
         "y": 0,
         "z": 1
-      },
-      "pp": false
+      }
     },
     {
-      "idn": 4,
+      "_id": 4,
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -102,13 +98,12 @@
         "x": 0,
         "y": 0,
         "z": 1
-      },
-      "pp": false
+      }
     }
   ],
-  "sls": [
+  "camera_slices": [
     {
-      "idn": 0,
+      "_id": 0,
       "sl_x": {
         "x": 10,
         "y": 10,
@@ -116,7 +111,7 @@
       }
     },
     {
-      "idn": 1,
+      "_id": 1,
       "sl_x": {
         "x": 30,
         "y": 40,

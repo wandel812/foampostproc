@@ -25,7 +25,7 @@ class Point:
 
 
 class CameraProps:
-    def __init__(self, idn: int, focal_point: Point, cam_position: Point, viewangle: int, viewup: Point, pp: bool):
+    def __init__(self, idn, focal_point: Point, cam_position: Point, viewangle: int, viewup: Point, pp: bool):
         self._idn = idn
         self._focal_point = focal_point
         self._cam_position = cam_position
@@ -34,7 +34,7 @@ class CameraProps:
         self._parallel_projection = pp
 
     @property
-    def idn(self) -> int:
+    def idn(self):
         return self._idn
 
     @property
@@ -78,8 +78,8 @@ class CameraSlice(object):
         return self._sl_z
 
 
-class CaseDir(object):
-    def __init__(self, idn: int, path: str):
+class CasesDir(object):
+    def __init__(self, idn, path: str):
         self._idn = idn
         self._path = Path(path)
 
@@ -93,18 +93,18 @@ class CaseDir(object):
 
 
 class FoamCase(object):
-    def __init__(self, idn: int, case_dir: CaseDir, cam_prop_list: List[CameraProps], slice_list: List[CameraSlice]):
+    def __init__(self, idn, case_dir: CasesDir, cam_prop_list: List[CameraProps], slice_list: List[CameraSlice]):
         self._idn = idn
         self._cases_dir = case_dir
         self._cam_prop_list = cam_prop_list
         self._slice_list = slice_list
 
     @property
-    def idn(self) -> int:
+    def idn(self):
         return self._idn
 
     @property
-    def case_dir(self) -> CaseDir:
+    def case_dir(self) -> CasesDir:
         return self._cases_dir
 
     @property

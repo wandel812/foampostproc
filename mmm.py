@@ -36,22 +36,22 @@ import time
 #     Render()
 #     print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-def test():
-    foamfoam = OpenFOAMReader(FileName='/home/dm/openfoam/cavity/a.foam')
-    foamfoam.MeshRegions = ['internalMesh']
-    servermanager.Fetch(foamfoam)
-    view = CreateRenderView(foamfoam)
-    view.ViewTime = max(foamfoam.TimestepValues)
-    Show(foamfoam, view)
-    #Render(view)
-    SaveScreenshot("aview.png", view)
-
-def test1():
-    source = Sphere()
-    view = CreateRenderView()
-    display = Show(source, view)
-    display.Visibility = 1
-    Render(view)
+# def test():
+#     foamfoam = OpenFOAMReader(FileName='/home/dm/openfoam/cavity/a.foam')
+#     foamfoam.MeshRegions = ['internalMesh']
+#     servermanager.Fetch(foamfoam)
+#     view = CreateRenderView(foamfoam)
+#     view.ViewTime = max(foamfoam.TimestepValues)
+#     Show(foamfoam, view)
+#     #Render(view)
+#     SaveScreenshot("aview.png", view)
+#
+# def test1():
+#     source = Sphere()
+#     view = CreateRenderView()
+#     display = Show(source, view)
+#     display.Visibility = 1
+#     Render(view)
 
 from pymongo import MongoClient
 
@@ -62,6 +62,8 @@ if __name__ == '__main__':
     db_proj_name = "foampostproc"
     db_connect_link = f"mongodb+srv://{login}:{password}@cluster0.ecqqe.mongodb.net/{db_proj_name}?retryWrites=true&w=majority"
     cluster = MongoClient(db_connect_link)
-    db =cluster[]
+    db =cluster.foampostproc_db
+    collection = db.foamcase
+    print(type(collection.find()))
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
