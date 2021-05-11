@@ -1,12 +1,11 @@
 {
-  "_id": 0,
+  "name": "case1",
   "cases_dir": {
-    "_id": 0,
     "cases_path": "/home/dm/openfoam/case0/"
   },
   "camera_props": [
     {
-      "_id": 0,
+      "name": "prop1",
       "focal_point": {
         "x": 0,
         "y": 0,
@@ -25,7 +24,7 @@
       }
     },
     {
-      "_id": 1,
+      "name": "prop2",
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -44,7 +43,7 @@
       }
     },
     {
-      "_id": 2,
+      "name": "prop3",
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -63,7 +62,7 @@
       }
     },
     {
-      "_id": 3,
+      "name": "prop4",
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -82,7 +81,7 @@
       }
     },
     {
-      "_id": 4,
+      "name": "prop5",
       "focal_point": {
         "x": 1,
         "y": 1,
@@ -103,7 +102,7 @@
   ],
   "camera_slices": [
     {
-      "_id": 0,
+      "name": "slice1",
       "sl_x": {
         "x": 10,
         "y": 10,
@@ -111,7 +110,7 @@
       }
     },
     {
-      "_id": 1,
+      "name": "slice2",
       "sl_x": {
         "x": 30,
         "y": 40,

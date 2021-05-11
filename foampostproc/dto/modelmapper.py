@@ -35,5 +35,4 @@ class Mapper:
                            cls.map_point_dto(c.focal_point),
                            cls.map_point_dto(c.cam_position),
                            c.viewangle,
-                           cls.map_point_dto(c.viewup),
-                           c.pp)
+                           cls.map_point_dto(c.viewup))

@@ -26,7 +26,7 @@ class MongoDaoFactory(DaoFactory):
     map_collection = {
         "MongoFoamCaseDAO": "foamcase",
         "MongoCaseDirDAO": "casesdir",
-        "MongoCameraSliceDAO": "cameraslices",
+        "MongoCameraSliceDAO": "cameraslice",
         "MongoCameraPropsDAO": "cameraprops"
     }
 

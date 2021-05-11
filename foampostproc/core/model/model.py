@@ -25,13 +25,12 @@ class Point:
 
 
 class CameraProps:
-    def __init__(self, idn, focal_point: Point, cam_position: Point, viewangle: int, viewup: Point, pp: bool):
+    def __init__(self, idn, focal_point: Point, cam_position: Point, viewangle: int, viewup: Point):
         self._idn = idn
         self._focal_point = focal_point
         self._cam_position = cam_position
         self._viewup = viewup
         self._viewangle = viewangle
-        self._parallel_projection = pp
 
     @property
     def idn(self):

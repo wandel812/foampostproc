@@ -5,14 +5,14 @@ from bson import ObjectId
 
 class FoamCaseDTO(object):
     def __init__(self, cases_dir: 'CasesDirDTO', camera_props: List['CameraPropsDTO'],
-                 camera_slices: List['SliceDTO'], _id=None, images: List[str] = None):
+                 camera_slices: List['SliceDTO'], name, _id=None, ):
         if _id is None:
             _id = ObjectId()
-        self._id = _id
+        self._id = ObjectId(_id)
         self.cases_dir = cases_dir
         self.camera_props = camera_props
         self.camera_slices = camera_slices
-        self.images = images
+        self.name = name
 
     @staticmethod
     def parse(d: Dict):
@@ -27,7 +27,7 @@ class CasesDirDTO(object):
     def __init__(self, cases_path: str, _id=None):
         if _id is None:
             _id = ObjectId()
-        self._id = _id
+        self._id = ObjectId(_id)
         self.cases_path = cases_path
 
     @staticmethod
@@ -56,10 +56,11 @@ class PointDTO(object):
 
 class CameraPropsDTO(object):
     def __init__(self, focal_point: PointDTO, cam_position: PointDTO, viewangle: int, viewup: PointDTO,
-                 _id=None):
+                 name, _id=None):
         if _id is None:
             _id = ObjectId()
-        self._id = _id
+        self._id = ObjectId(_id)
+        self.name = name
         self.focal_point = focal_point
         self.cam_position = cam_position
         self.viewangle = viewangle
@@ -75,10 +76,11 @@ class CameraPropsDTO(object):
 
 
 class SliceDTO(object):
-    def __init__(self, sl_x: PointDTO = None, sl_y: PointDTO = None, sl_z: PointDTO = None, _id=None):
+    def __init__(self, name, sl_x: PointDTO = None, sl_y: PointDTO = None, sl_z: PointDTO = None, _id=None):
         if _id is None:
             _id = ObjectId()
-        self._id = _id
+        self._id = ObjectId(_id)
+        self.name = name
         self.sl_x = sl_x
         self.sl_y = sl_y
         self.sl_z = sl_z
@@ -93,6 +95,7 @@ class SliceDTO(object):
 
 
 parse_functions = [FoamCaseDTO.parse, CasesDirDTO.parse, PointDTO.parse, CameraPropsDTO.parse, SliceDTO.parse]
+
 
 def parse_config_json_hook(dct: Dict):
     res = None
