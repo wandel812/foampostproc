@@ -4,24 +4,12 @@ from typing import List
 
 class Point:
     def __init__(self, x: float, y: float, z: float):
-        self._x = x
-        self._y = y
-        self._z = z
+        self.x = x
+        self.y = y
+        self.z = z
 
     def __repr__(self):
-        return f"<Point: {self._x} {self._y} {self._z}>"
-
-    @property
-    def x(self):
-        return self._x
-
-    @property
-    def y(self):
-        return self._y
-
-    @property
-    def z(self):
-        return self._z
+        return f"<Point: {self.x} {self.y} {self.z}>"
 
 
 class CameraProps:

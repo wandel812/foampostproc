@@ -1,5 +1,5 @@
 from foampostproc.dto.dto import CasesDirDTO, PointDTO, SliceDTO, CameraPropsDTO, FoamCaseDTO
-from foampostproc.core.model.model import Point, CameraSlice, CameraProps, FoamCase, CasesDir
+from foampostproc.core.model import Point, CameraSlice, CameraProps, FoamCase, CasesDir
 
 
 class Mapper:
