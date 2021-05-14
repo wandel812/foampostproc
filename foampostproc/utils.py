@@ -1,3 +1,4 @@
+from os.path import dirname, abspath
 from pathlib import Path
 from typing import Any
 from ntpath import split
@@ -5,8 +6,19 @@ from os import makedirs
 from json import dumps, load
 from paraview.simple import *
 
+SRC_DIR = Path(dirname(abspath(__file__)))
+PROJ_DIR = SRC_DIR.parent
+OTP_DIR = PROJ_DIR / "screenshot_otp"
 
-class FileHandling:
+class SharedState(object):
+    case_list = []
+    m_widget = None
+    cam_props_for_del = []
+    slices_for_del = []
+    cases_for_del = []
+
+
+class FileHandling(object):
     @classmethod
     def write_json(cls, obj, path: str) -> None:
         def get_object_dict(d):
@@ -41,3 +53,6 @@ class FileHandling:
         dir_path.mkdir(parents=True, exist_ok=True)
         with open(file_path, mode) as out:
             out.write(text)
+
+if __name__ == "__main__":
+    print(PROJ_DIR)

@@ -1,6 +1,5 @@
 from abc import ABC, abstractmethod
 from typing import Any, List
-
 from foampostproc.dao.daofactory import MongoDaoFactory
 from foampostproc.dto.dto import FoamCaseDTO, CasesDirDTO, CameraPropsDTO, SliceDTO
 
@@ -15,6 +14,9 @@ class AbstractDAO(ABC):
 
     @abstractmethod
     def create(self, obj: Any) -> Any:
+        pass
+
+    def create_or_update(self, obj: Any) -> Any:
         pass
 
     @abstractmethod
@@ -60,7 +62,7 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
                     "name": dto_obj.name,
                     "cases_dir": cases_dir_id,
                     "camera_props": camera_props_ids,
-                    "camera_slices": camera_slices_ids,
+                    "camera_slices": camera_slices_ids
                 })
 
             camera_props_dao = MongoDaoFactory().get_dao(MongoCameraPropsDAO)
@@ -72,6 +74,7 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
                 camera_slices_dao.create(dto_camera_slice)
 
             MongoDaoFactory().get_dao(MongoCaseDirDAO).create(dto_obj.cases_dir)
+            return self.connection.count_documents({"_id": _id}) == 0
         except Exception:
             raise RuntimeError("Something went wrong with object creation")
 
@@ -82,7 +85,7 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
             cases_dir = dao_fact.get_dao(MongoCaseDirDAO).read(obj_dct["cases_dir"])
             camera_props = [dao_fact.get_dao(MongoCameraPropsDAO).read(prop) for prop in obj_dct["camera_props"]]
             camera_slices = [dao_fact.get_dao(MongoCameraSliceDAO).read(sl) for sl in obj_dct["camera_slices"]]
-            return FoamCaseDTO(cases_dir, camera_props, camera_slices, obj_dct["_id"])
+            return FoamCaseDTO(cases_dir, camera_props, camera_slices, obj_dct["name"], obj_dct["_id"])
         except Exception:
             raise RuntimeError("Something went wrong with object reading")
 
@@ -91,15 +94,38 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
             camera_props_ids = [str(prop._id) for prop in dto_obj.camera_props]
             camera_slices_ids = [str(sl._id) for sl in dto_obj.camera_slices]
             cases_dir_id = str(dto_obj.cases_dir._id)
-            self.connection.update_one({"_id": dto_obj._id},
-                                       {"$set": {
-                                           "name": dto_obj.name,
-                                           "cases_dir": cases_dir_id,
-                                           "camera_props": camera_props_ids,
-                                           "camera_slices": camera_slices_ids,
-                                       }})
+            print(camera_props_ids, dto_obj._id)
+            self.connection.update_one({"_id": str(dto_obj._id)},
+                                   {"$set": {
+                                       "name": dto_obj.name,
+                                       "cases_dir": cases_dir_id,
+                                       "camera_props": camera_props_ids,
+                                       "camera_slices": camera_slices_ids
+                                   }})
+
+
+
+            camera_props_dao = MongoDaoFactory().get_dao(MongoCameraPropsDAO)
+            for dto_camera_prop in dto_obj.camera_props:
+                camera_props_dao.create(dto_camera_prop)
+            camera_slices_dao = MongoDaoFactory().get_dao(MongoCameraSliceDAO)
+            for dto_camera_slice in dto_obj.camera_slices:
+                camera_slices_dao.create(dto_camera_slice)
+            MongoDaoFactory().get_dao(MongoCaseDirDAO).create(dto_obj.cases_dir)
         except Exception:
             raise RuntimeError("Something went wrong with object updating")
+
+    def create_or_update(self, dto_obj: FoamCaseDTO):
+        result = self.create(dto_obj)
+        if not result:
+            self.update(dto_obj)
+            camera_props_dao = MongoDaoFactory().get_dao(MongoCameraPropsDAO)
+            for dto_camera_prop in dto_obj.camera_props:
+                camera_props_dao.create_or_update(dto_camera_prop)
+            camera_slices_dao = MongoDaoFactory().get_dao(MongoCameraSliceDAO)
+            for dto_camera_slice in dto_obj.camera_slices:
+                camera_slices_dao.create(dto_camera_slice)
+            MongoDaoFactory().get_dao(MongoCaseDirDAO).create_or_update(dto_obj.cases_dir)
 
 
 class MongoCaseDirDAO(MongoAbstractDAO):
@@ -108,6 +134,8 @@ class MongoCaseDirDAO(MongoAbstractDAO):
             if self.connection.count_documents({"_id": str(dto_obj._id)}) == 0:
                 self.connection.insert_one({"_id": str(dto_obj._id),
                                             "cases_path": dto_obj.cases_path})
+                return True
+            return False
         except Exception:
             raise RuntimeError("Something went wrong with object creation")
 
@@ -127,6 +155,11 @@ class MongoCaseDirDAO(MongoAbstractDAO):
         except Exception:
             raise RuntimeError("Something went wrong with object updating")
 
+    def create_or_update(self, dto_obj: CasesDirDTO):
+        result = self.create(dto_obj)
+        if not result:
+            self.update(dto_obj)
+
 
 class MongoCameraPropsDAO(MongoAbstractDAO):
     def create(self, dto_obj: CameraPropsDTO):
@@ -140,6 +173,8 @@ class MongoCameraPropsDAO(MongoAbstractDAO):
                     "viewangle": dto_obj.viewangle,
                     "viewup": dto_obj.viewup.__dict__,
                 })
+                return True
+            return False
         except Exception:
             raise RuntimeError("Something went wrong with object creation")
 
@@ -163,6 +198,11 @@ class MongoCameraPropsDAO(MongoAbstractDAO):
         except Exception:
             raise RuntimeError("Something went wrong with object updating")
 
+    def create_or_update(self, dto_obj: CameraPropsDTO):
+        result = self.create(dto_obj)
+        if not result:
+            self.update(dto_obj)
+
 
 class MongoCameraSliceDAO(MongoAbstractDAO):
     def create(self, dto_obj: SliceDTO):
@@ -175,6 +215,8 @@ class MongoCameraSliceDAO(MongoAbstractDAO):
                     "sl_y": None if dto_obj.sl_y is None else dto_obj.sl_y.__dict__,
                     "sl_z": None if dto_obj.sl_z is None else dto_obj.sl_z.__dict__
                 })
+                return True
+            return False
         except Exception:
             raise RuntimeError("Something went wrong with object creation")
 
@@ -195,3 +237,8 @@ class MongoCameraSliceDAO(MongoAbstractDAO):
                                        }})
         except Exception:
             raise RuntimeError("Something went wrong with object updating")
+
+    def create_or_update(self, dto_obj: SliceDTO):
+        result = self.create(dto_obj)
+        if not result:
+            self.update(dto_obj)
