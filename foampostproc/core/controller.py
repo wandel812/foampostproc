@@ -1,17 +1,16 @@
-import sys
 from copy import deepcopy
 from pathlib import Path
-from typing import List, Callable
 
 from PySide6 import QtWidgets as QtW, QtCore as QtC
 from bson import ObjectId
 
+from foampostproc.config import Config
 from foampostproc.core.model import Point, FoamCase, CasesDir, CameraProps, CameraSlice
 from foampostproc.core.screenshot.taker import Screenshot
 from foampostproc.dao.dao import MongoFoamCaseDAO, MongoCameraPropsDAO, MongoCameraSliceDAO
 from foampostproc.dao.daofactory import MongoDaoFactory
 from foampostproc.dto.modelmapper import Mapper
-from foampostproc.utils import OTP_DIR, SharedState
+from foampostproc.utils import SharedState
 
 
 def handle_cases_add_button_clicked():
@@ -36,7 +35,6 @@ def handle_cases_rm_button_clicked():
 
 
 def handle_cases_item_selection():
-
     case = _get_selected_case()
     list_ = SharedState.m_widget.camera_props_control_list.list_
     SharedState.m_widget.camera_props_params_form.clear()
@@ -44,7 +42,6 @@ def handle_cases_item_selection():
     list_.addItems([prop.name for prop in case.cam_prop_list])
     list_.setCurrentRow(0)
     handle_camera_props_item_selection()
-
 
     #
     # list_ = SharedState.m_widget.slice_props_control_list.list_
@@ -59,7 +56,7 @@ def handle_cases_item_selection():
 
 
 def handle_generate_button_clicked():
-    Screenshot.take_screenshots(SharedState.case_list, OTP_DIR)
+    Screenshot.take_screenshots(SharedState.case_list, Config.get_section("Paths").get_path("output"))
 
 
 def handle_case_path_field_on_text_changed():
@@ -134,8 +131,6 @@ def handle_slice_props_rm_button_clicked():
 
 
 def handle_slice_props_item_selection():
-    # if len(_get_selected_case().cam_prop_list) == 0:
-    #     return
     slice_ = _get_selected_slice_prop()
 
     if slice_ is not None:
@@ -172,7 +167,7 @@ def handle_save_btn():
     case.cases_dir.path = Path(case_path_field_text)
 
     cam_prop = _get_selected_cam_prop()
-    #slice_ = _get_selected_slice_prop()
+    # slice_ = _get_selected_slice_prop()
 
     cam_form = SharedState.m_widget.camera_props_params_form
     cam_prop.cam_position = deepcopy(cam_form.position)
@@ -232,8 +227,6 @@ def handle_save_db_btn():
     SharedState.cam_props_for_del = []
     SharedState.slices_for_del = []
     SharedState.cases_for_del = []
-
-
 
 
 def _get_selected_case_row():

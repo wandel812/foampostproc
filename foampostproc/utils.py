@@ -8,7 +8,6 @@ from paraview.simple import *
 
 SRC_DIR = Path(dirname(abspath(__file__)))
 PROJ_DIR = SRC_DIR.parent
-OTP_DIR = PROJ_DIR / "screenshot_otp"
 
 class SharedState(object):
     case_list = []

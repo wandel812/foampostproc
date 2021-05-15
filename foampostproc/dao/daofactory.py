@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from pymongo import MongoClient
 
+from foampostproc.config import Config
+
 
 class DaoFactory(ABC):
     @abstractmethod
@@ -13,14 +15,14 @@ class DaoFactory(ABC):
 
 
 class MongoDaoFactory(DaoFactory):
-    login = "dbUser"
-    password = "a4eYAyhZ4xgXEre"
-    db_proj_name = "foampostproc"
+    LOGIN =  Config.get_section("DataBaseUser").get("login")
+    PASSWORD = Config.get_section("DataBaseUser").get("password")
+    DB_PROJ_NAME = Config.get_section("DataBaseUser").get("db_proj_name")
+    DB_CONNECT_LINK = f"mongodb+srv://{LOGIN}:{PASSWORD}@cluster0.ecqqe.mongodb.net/" \
+                      f"{DB_PROJ_NAME}?retryWrites=true&w=majority"
 
     def get_connection(self):
-        db_connect_link = f"mongodb+srv://{self.login}:{self.password}@cluster0.ecqqe.mongodb.net/" \
-                          f"{self.db_proj_name}?retryWrites=true&w=majority"
-        cluster = MongoClient(db_connect_link)
+        cluster = MongoClient(self.DB_CONNECT_LINK)
         return cluster.foampostproc_db
 
     map_collection = {
