@@ -11,7 +11,8 @@ class Mapper:
             t = cls.map_slice_dto(sl)
             slices_.append(t)
 
-        return FoamCase(foam_case._id, foam_case.name, cls.map_foam_cases_path_dto(foam_case.cases_dir), cam_props, slices_)
+        return FoamCase(foam_case._id, foam_case.name, cls.map_foam_cases_path_dto(foam_case.cases_dir), cam_props,
+                        slices_)
 
     @classmethod
     def map_foam_case_to_dto(cls, foam_case: FoamCase) -> FoamCaseDTO:
@@ -56,7 +57,6 @@ class Mapper:
         sl_y = None if s.sl_y is None else cls.map_point_to_dto(s.sl_y)
         sl_z = None if s.sl_z is None else cls.map_point_to_dto(s.sl_z)
         return SliceDTO(s.name, sl_x, sl_y, sl_z, _id=s.idn)
-
 
     @classmethod
     def map_camera_props_dto(cls, c_dto: CameraPropsDTO) -> CameraProps:

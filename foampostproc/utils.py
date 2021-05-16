@@ -9,6 +9,7 @@ from paraview.simple import *
 SRC_DIR = Path(dirname(abspath(__file__)))
 PROJ_DIR = SRC_DIR.parent
 
+
 class SharedState(object):
     case_list = []
     m_widget = None
@@ -45,13 +46,13 @@ class FileHandling(object):
         Path.unlink(foamcase_path)
         return foamcase
 
-
     @classmethod
     def write_file(cls, file_path: Path, text: str = "", mode: str = 'w'):
         dir_path = file_path.parent
         dir_path.mkdir(parents=True, exist_ok=True)
         with open(file_path, mode) as out:
             out.write(text)
+
 
 if __name__ == "__main__":
     print(PROJ_DIR)

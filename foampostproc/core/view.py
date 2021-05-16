@@ -6,6 +6,7 @@ from PySide6.QtWidgets import QAbstractItemView
 
 from foampostproc.core.model import Point
 
+
 class ControlList(QtW.QWidget):
     ADD_BUTTON_TEXT = "Добавить"
     RM_BUTTON_TEXT = "Удалить"
@@ -171,15 +172,17 @@ class CameraParamsForm(QtW.QWidget):
                                                .__setattr__("x", 0 if text == "" else float(text)),
                                                lambda text: self.focal_point
                                                .__setattr__("y", 0 if text == "" else float(text)),
-                                               lambda text: self.focal_point.__setattr__("z", 0 if text == "" else float(text)))
+                                               lambda text: self.focal_point.__setattr__("z",
+                                                                                         0 if text == "" else float(
+                                                                                             text)))
 
         self.view_up_field = PointTextEdit(self.VIEW_ANGLE_FIELD_TEXT,
-                                           lambda text: self.view_up.__setattr__("x",  0 if text == "" else float(text)),
-                                           lambda text: self.view_up.__setattr__("y",  0 if text == "" else float(text)),
-                                           lambda text: self.view_up.__setattr__("z",  0 if text == "" else float(text)))
+                                           lambda text: self.view_up.__setattr__("x", 0 if text == "" else float(text)),
+                                           lambda text: self.view_up.__setattr__("y", 0 if text == "" else float(text)),
+                                           lambda text: self.view_up.__setattr__("z", 0 if text == "" else float(text)))
 
         self.view_angle_field = TextEdit(self.VIEW_UP_TEXT, lambda text: self._view_angle
-                                         .__setitem__(0,  0 if text == "" else float(text)))
+                                         .__setitem__(0, 0 if text == "" else float(text)))
 
         self.setLayout(QtW.QVBoxLayout())
         self.layout().addWidget(self.position_field)
@@ -262,7 +265,8 @@ class Button(QtW.QPushButton):
 
 
 class SaveResetButtonGroup(QtW.QWidget):
-    def __init__(self, save_btn_txt: str, save_db_btn_txt: str, handle_save: Callable, handle_save_db: Callable, handle_reset: Callable,
+    def __init__(self, save_btn_txt: str, save_db_btn_txt: str, handle_save: Callable, handle_save_db: Callable,
+                 handle_reset: Callable,
                  reset_btn_text: str):
         super().__init__()
 
@@ -304,7 +308,6 @@ class MainWidget(QtW.QWidget):
     SAVE_BTN_TEXT = "Сохранить"
     SAVE_DB_BTN_TEXT = "Сохранить в БД"
     RESET_BTN_TEXT = "Сбросить"
-
 
     def __init__(self, case_list: List[str],
                  handle_cases_add_button_clicked,
@@ -362,7 +365,7 @@ class MainWidget(QtW.QWidget):
         handle_reset_btn = handle_reset_btn
         self.save_reset_btn_group = SaveResetButtonGroup(self.SAVE_BTN_TEXT, self.SAVE_DB_BTN_TEXT,
                                                          handle_save_btn, handle_save_db_btn,
-                                                         handle_reset_btn,self.RESET_BTN_TEXT)
+                                                         handle_reset_btn, self.RESET_BTN_TEXT)
 
         self.second_col_widget = QtW.QWidget()
         self.second_col_widget.setLayout(QtW.QVBoxLayout())

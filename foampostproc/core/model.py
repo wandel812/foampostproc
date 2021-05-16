@@ -30,6 +30,7 @@ class CameraSlice(object):
         self.sl_y = sl_y
         self.sl_z = sl_z
 
+
 class CasesDir(object):
     def __init__(self, idn, path: str):
         self.idn = idn
@@ -37,7 +38,8 @@ class CasesDir(object):
 
 
 class FoamCase(object):
-    def __init__(self, idn, name: str, case_dir: CasesDir, cam_prop_list: List[CameraProps], slice_list: List[CameraSlice]):
+    def __init__(self, idn, name: str, case_dir: CasesDir, cam_prop_list: List[CameraProps],
+                 slice_list: List[CameraSlice]):
         self.idn = idn
         self.name = name
         self.cases_dir = case_dir

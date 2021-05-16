@@ -7,8 +7,8 @@ from foampostproc.utils import PROJ_DIR
 
 CONFIG_PATH = PROJ_DIR / Path("config/app.ini")
 
-class Config:
 
+class Config:
     __config: configparser.RawConfigParser = configparser.ConfigParser()
     __is_read = False
 

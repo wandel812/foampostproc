@@ -62,7 +62,7 @@ if __name__ == '__main__':
     db_proj_name = "foampostproc"
     db_connect_link = f"mongodb+srv://{login}:{password}@cluster0.ecqqe.mongodb.net/{db_proj_name}?retryWrites=true&w=majority"
     cluster = MongoClient(db_connect_link)
-    db =cluster.foampostproc_db
+    db = cluster.foampostproc_db
     collection = db.foamcase
     print(type(collection.find()))
 

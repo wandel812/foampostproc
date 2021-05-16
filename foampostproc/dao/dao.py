@@ -96,14 +96,12 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
             cases_dir_id = str(dto_obj.cases_dir._id)
             print(camera_props_ids, dto_obj._id)
             self.connection.update_one({"_id": str(dto_obj._id)},
-                                   {"$set": {
-                                       "name": dto_obj.name,
-                                       "cases_dir": cases_dir_id,
-                                       "camera_props": camera_props_ids,
-                                       "camera_slices": camera_slices_ids
-                                   }})
-
-
+                                       {"$set": {
+                                           "name": dto_obj.name,
+                                           "cases_dir": cases_dir_id,
+                                           "camera_props": camera_props_ids,
+                                           "camera_slices": camera_slices_ids
+                                       }})
 
             camera_props_dao = MongoDaoFactory().get_dao(MongoCameraPropsDAO)
             for dto_camera_prop in dto_obj.camera_props:

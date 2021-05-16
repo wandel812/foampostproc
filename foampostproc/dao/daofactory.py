@@ -15,7 +15,7 @@ class DaoFactory(ABC):
 
 
 class MongoDaoFactory(DaoFactory):
-    LOGIN =  Config.get_section("DataBaseUser").get("login")
+    LOGIN = Config.get_section("DataBaseUser").get("login")
     PASSWORD = Config.get_section("DataBaseUser").get("password")
     DB_PROJ_NAME = Config.get_section("DataBaseUser").get("db_proj_name")
     DB_CONNECT_LINK = f"mongodb+srv://{LOGIN}:{PASSWORD}@cluster0.ecqqe.mongodb.net/" \
