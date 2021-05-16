@@ -6,7 +6,6 @@ from PySide6.QtWidgets import QAbstractItemView
 
 from foampostproc.core.model import Point
 
-
 class ControlList(QtW.QWidget):
     ADD_BUTTON_TEXT = "Добавить"
     RM_BUTTON_TEXT = "Удалить"
@@ -204,7 +203,6 @@ class CameraParamsForm(QtW.QWidget):
         self.focal_point_field.clear()
         self.view_up_field.clear()
         self.view_angle_field.clear()
-
 
 
 class SliceParamsForm(QtW.QWidget):

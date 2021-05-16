@@ -6,11 +6,11 @@ from foampostproc.config import Config
 
 class DaoFactory(ABC):
     @abstractmethod
-    def get_connection(self):
+    def _get_connection(self):
         pass
 
     @abstractmethod
-    def get_dao(self, connection, dto_class):
+    def get_dao(self, connection, dao_class):
         pass
 
 
@@ -21,7 +21,7 @@ class MongoDaoFactory(DaoFactory):
     DB_CONNECT_LINK = f"mongodb+srv://{LOGIN}:{PASSWORD}@cluster0.ecqqe.mongodb.net/" \
                       f"{DB_PROJ_NAME}?retryWrites=true&w=majority"
 
-    def get_connection(self):
+    def _get_connection(self):
         cluster = MongoClient(self.DB_CONNECT_LINK)
         return cluster.foampostproc_db
 
@@ -37,6 +37,6 @@ class MongoDaoFactory(DaoFactory):
 
     def get_dao(self, dao_class, connection=None):
         if connection is None:
-            connection = self.get_connection()
+            connection = self._get_connection()
         collection = self._get_collection(connection, dao_class)
         return dao_class(collection)

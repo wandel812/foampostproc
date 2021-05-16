@@ -21,19 +21,19 @@ WINDOW_TITLE = Config.get_section("ViewProperties").get("window_title")
 TEST_DATA_PATH = Config.get_section("Paths").get_path("test_data")
 
 
-def run0():
+def __run0():
     case_dto = FileHandling.read_json(TEST_DATA_PATH, object_hook_=dto.parse_config_json_hook)
 
-def run1():
+
+def __run1():
     case_dtos = MongoDaoFactory().get_dao(MongoFoamCaseDAO).get_all()
     cases = list(map(Mapper.map_foam_case_dto, case_dtos))
     Screenshot.take_screenshots(cases, Config.get_section("Paths").get_path("output"))
 
 
-def run2():
+def run():
     case_dtos = MongoDaoFactory().get_dao(MongoFoamCaseDAO).get_all()
     cases = list(map(Mapper.map_foam_case_dto, case_dtos))
-
 
     app = QtW.QApplication(sys.argv)
 
@@ -55,4 +55,4 @@ def run2():
 
 
 if __name__ == "__main__":
-    run2()
+    run()

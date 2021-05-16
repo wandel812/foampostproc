@@ -13,10 +13,10 @@ class Config:
     __is_read = False
 
     @classmethod
-    def get_section(cls, section: str) -> 'PyQtGuiGenConfigSectionProxy':
+    def get_section(cls, section: str) -> 'ConfigSectionProxy':
         if not cls.__is_read:
             cls._read_config()
-        return PyQtGuiGenConfigSectionProxy(cls.__config[section])
+        return ConfigSectionProxy(cls.__config[section])
 
     @classmethod
     def _read_config(cls):
@@ -24,7 +24,7 @@ class Config:
         cls.__is_read = True
 
 
-class PyQtGuiGenConfigSectionProxy:
+class ConfigSectionProxy:
     COMMON_SECTION: str = "Common"
     USE_PROJ_PREFIX_FOR_PATHS = "use_proj_prefix_for_paths"
 
