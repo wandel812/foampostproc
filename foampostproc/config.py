@@ -2,7 +2,6 @@ import configparser
 from pathlib import Path
 from typing import List
 
-# gui generator config -------------------------------------------------------------------------------------------------
 from foampostproc.utils import PROJ_DIR
 
 CONFIG_PATH = PROJ_DIR / Path("config/app.ini")
