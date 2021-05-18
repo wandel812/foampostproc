@@ -13,7 +13,8 @@ class Point:
 
 
 class CameraProps:
-    def __init__(self, idn, name: str, focal_point: Point, cam_position: Point, viewangle: int, viewup: Point):
+    def __init__(self, idn, name: str, focal_point: Point,
+                 cam_position: Point, viewangle: int, viewup: Point):
         self.idn = idn
         self.name = name
         self.focal_point = focal_point
@@ -23,7 +24,8 @@ class CameraProps:
 
 
 class CameraSlice(object):
-    def __init__(self, idn, name: str, sl_x: Point = None, sl_y: Point = None, sl_z: Point = None):
+    def __init__(self, idn, name: str,
+                 sl_x: Point = None, sl_y: Point = None, sl_z: Point = None):
         self.idn = idn
         self.name = name
         self.sl_x = sl_x
@@ -38,8 +40,8 @@ class CasesDir(object):
 
 
 class FoamCase(object):
-    def __init__(self, idn, name: str, case_dir: CasesDir, cam_prop_list: List[CameraProps],
-                 slice_list: List[CameraSlice]):
+    def __init__(self, idn, name: str, case_dir: CasesDir,
+                 cam_prop_list: List[CameraProps], slice_list: List[CameraSlice]):
         self.idn = idn
         self.name = name
         self.cases_dir = case_dir

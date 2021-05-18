@@ -38,8 +38,10 @@ class ControlList(QtW.QWidget):
 
         header_widget.label = QtW.QLabel(label_text)
 
-        header_widget.add_button = Button(self.ADD_BUTTON_TEXT, self.handle_header_add_button)
-        header_widget.remove_button = Button(self.RM_BUTTON_TEXT, self.handle_header_remove_button)
+        header_widget.add_button = Button(self.ADD_BUTTON_TEXT,
+                                          self.handle_header_add_button)
+        header_widget.remove_button = Button(self.RM_BUTTON_TEXT,
+                                             self.handle_header_remove_button)
 
         header_layout.addWidget(header_widget.label)
         header_layout.addSpacing(4)
@@ -72,7 +74,8 @@ class ControlList(QtW.QWidget):
 class TextEdit(QtW.QWidget):
     LABEL_SPACING = 4
 
-    def __init__(self, label_text: str, handle_on_text_changed: Callable, edit_text: str = ""):
+    def __init__(self, label_text: str,
+                 handle_on_text_changed: Callable, edit_text: str = ""):
         super().__init__()
         self.handle_on_text_changed = handle_on_text_changed
 
@@ -159,30 +162,36 @@ class CameraParamsForm(QtW.QWidget):
         self.view_up = Point(0, 0, 0)
         self._view_angle = [0]
 
-        self.position_field = PointTextEdit(self.POSITION_FIELD_TEXT,
-                                            lambda text: self.position
-                                            .__setattr__("x", 0 if text == "" else float(text)),
-                                            lambda text: self.position
-                                            .__setattr__("y", 0 if text == "" else float(text)),
-                                            lambda text: self.position
-                                            .__setattr__("z", 0 if text == "" else float(text)))
+        self.position_field \
+            = PointTextEdit(self.POSITION_FIELD_TEXT,
+                            lambda text: self.position
+                            .__setattr__("x", 0 if text == "" else float(text)),
+                            lambda text: self.position
+                            .__setattr__("y", 0 if text == "" else float(text)),
+                            lambda text: self.position
+                            .__setattr__("z", 0 if text == "" else float(text)))
 
-        self.focal_point_field = PointTextEdit(self.FOCAL_POINT_FIELD_TEXT,
-                                               lambda text: self.focal_point
-                                               .__setattr__("x", 0 if text == "" else float(text)),
-                                               lambda text: self.focal_point
-                                               .__setattr__("y", 0 if text == "" else float(text)),
-                                               lambda text: self.focal_point.__setattr__("z",
-                                                                                         0 if text == "" else float(
-                                                                                             text)))
+        self.focal_point_field \
+            = PointTextEdit(self.FOCAL_POINT_FIELD_TEXT,
+                            lambda text: self.focal_point
+                            .__setattr__("x", 0 if text == "" else float(text)),
+                            lambda text: self.focal_point
+                            .__setattr__("y", 0 if text == "" else float(text)),
+                            lambda text: self.focal_point
+                            .__setattr__("z", 0 if text == "" else float(text)))
 
-        self.view_up_field = PointTextEdit(self.VIEW_ANGLE_FIELD_TEXT,
-                                           lambda text: self.view_up.__setattr__("x", 0 if text == "" else float(text)),
-                                           lambda text: self.view_up.__setattr__("y", 0 if text == "" else float(text)),
-                                           lambda text: self.view_up.__setattr__("z", 0 if text == "" else float(text)))
+        self.view_up_field \
+            = PointTextEdit(self.VIEW_ANGLE_FIELD_TEXT,
+                            lambda text: self.view_up.__setattr__(
+                                "x", 0 if text == "" else float(text)),
+                            lambda text: self.view_up.__setattr__(
+                                "y", 0 if text == "" else float(text)),
+                            lambda text: self.view_up.__setattr__(
+                                "z", 0 if text == "" else float(text)))
 
-        self.view_angle_field = TextEdit(self.VIEW_UP_TEXT, lambda text: self._view_angle
-                                         .__setitem__(0, 0 if text == "" else float(text)))
+        self.view_angle_field \
+            = TextEdit(self.VIEW_UP_TEXT, lambda text: self._view_angle
+                       .__setitem__(0, 0 if text == "" else float(text)))
 
         self.setLayout(QtW.QVBoxLayout())
         self.layout().addWidget(self.position_field)
@@ -223,22 +232,34 @@ class SliceParamsForm(QtW.QWidget):
         self.setLayout(QtW.QVBoxLayout())
 
         self.x_slice = Point(0, 0, 0)
-        self.x_slice_field = PointTextEdit(self.X_SLICE_LABEL_TEXT,
-                                           lambda text: self.x_slice.__setattr__("x", 0 if text == "" else float(text)),
-                                           lambda text: self.x_slice.__setattr__("y", 0 if text == "" else float(text)),
-                                           lambda text: self.x_slice.__setattr__("z", 0 if text == "" else float(text)))
+        self.x_slice_field \
+            = PointTextEdit(self.X_SLICE_LABEL_TEXT,
+                            lambda text: self.x_slice.__setattr__(
+                                "x", 0 if text == "" else float(text)),
+                            lambda text: self.x_slice.__setattr__(
+                                "y", 0 if text == "" else float(text)),
+                            lambda text: self.x_slice.__setattr__(
+                                "z", 0 if text == "" else float(text)))
 
         self.y_slice = Point(0, 0, 0)
-        self.y_slice_field = PointTextEdit(self.Y_SLICE_LABEL_TEXT,
-                                           lambda text: self.y_slice.__setattr__("x", 0 if text == "" else float(text)),
-                                           lambda text: self.y_slice.__setattr__("y", 0 if text == "" else float(text)),
-                                           lambda text: self.y_slice.__setattr__("z", 0 if text == "" else float(text)))
+        self.y_slice_field \
+            = PointTextEdit(self.Y_SLICE_LABEL_TEXT,
+                            lambda text: self.y_slice.__setattr__(
+                                "x", 0 if text == "" else float(text)),
+                            lambda text: self.y_slice.__setattr__(
+                                "y", 0 if text == "" else float(text)),
+                            lambda text: self.y_slice.__setattr__(
+                                "z", 0 if text == "" else float(text)))
 
         self.z_slice = Point(0, 0, 0)
-        self.z_slice_field = PointTextEdit(self.Z_SLICE_LABEL_TEXT,
-                                           lambda text: self.z_slice.__setattr__("x", 0 if text == "" else float(text)),
-                                           lambda text: self.z_slice.__setattr__("y", 0 if text == "" else float(text)),
-                                           lambda text: self.z_slice.__setattr__("z", 0 if text == "" else float(text)))
+        self.z_slice_field \
+            = PointTextEdit(self.Z_SLICE_LABEL_TEXT,
+                            lambda text: self.z_slice.__setattr__(
+                                "x", 0 if text == "" else float(text)),
+                            lambda text: self.z_slice.__setattr__(
+                                "y", 0 if text == "" else float(text)),
+                            lambda text: self.z_slice.__setattr__(
+                                "z", 0 if text == "" else float(text)))
 
         self.setLayout(QtW.QVBoxLayout())
         self.layout().addWidget(self.x_slice_field)
@@ -265,7 +286,8 @@ class Button(QtW.QPushButton):
 
 
 class SaveResetButtonGroup(QtW.QWidget):
-    def __init__(self, save_btn_txt: str, save_db_btn_txt: str, handle_save: Callable, handle_save_db: Callable,
+    def __init__(self, save_btn_txt: str, save_db_btn_txt: str,
+                 handle_save: Callable, handle_save_db: Callable,
                  handle_reset: Callable,
                  reset_btn_text: str):
         super().__init__()
@@ -339,16 +361,19 @@ class MainWidget(QtW.QWidget):
         self.first_col_widget.layout().addWidget(self.generate_button)
 
         # second col ---------------------------------------------
-        self.handle_case_path_field_on_text_changed = handle_case_path_field_on_text_changed
-        self.case_path_field = TextEdit(self.CASE_PATH_FIELD_TEXT, self.handle_case_path_field_on_text_changed)
+        self.handle_case_path_field_on_text_changed \
+            = handle_case_path_field_on_text_changed
+        self.case_path_field = TextEdit(self.CASE_PATH_FIELD_TEXT,
+                                        self.handle_case_path_field_on_text_changed)
 
         handle_camera_props_add_button_clicked = handle_camera_props_add_button_clicked
         handle_camera_props_rm_button_clicked = handle_camera_props_rm_button_clicked
         handle_camera_props_item_selection = handle_camera_props_item_selection
-        self.camera_props_control_list = ControlList(self.CAMERA_PROPS_LABEL, [],
-                                                     handle_camera_props_add_button_clicked,
-                                                     handle_camera_props_rm_button_clicked,
-                                                     handle_camera_props_item_selection)
+        self.camera_props_control_list \
+            = ControlList(self.CAMERA_PROPS_LABEL, [],
+                          handle_camera_props_add_button_clicked,
+                          handle_camera_props_rm_button_clicked,
+                          handle_camera_props_item_selection)
         self.camera_props_params_form = CameraParamsForm()
 
         handle_slice_props_add_button_clicked = handle_slice_props_add_button_clicked
@@ -363,9 +388,10 @@ class MainWidget(QtW.QWidget):
         handle_save_btn = handle_save_btn
         handle_save_db_btn = handle_save_db_btn
         handle_reset_btn = handle_reset_btn
-        self.save_reset_btn_group = SaveResetButtonGroup(self.SAVE_BTN_TEXT, self.SAVE_DB_BTN_TEXT,
-                                                         handle_save_btn, handle_save_db_btn,
-                                                         handle_reset_btn, self.RESET_BTN_TEXT)
+        self.save_reset_btn_group \
+            = SaveResetButtonGroup(self.SAVE_BTN_TEXT, self.SAVE_DB_BTN_TEXT,
+                                   handle_save_btn, handle_save_db_btn,
+                                   handle_reset_btn, self.RESET_BTN_TEXT)
 
         self.second_col_widget = QtW.QWidget()
         self.second_col_widget.setLayout(QtW.QVBoxLayout())
@@ -374,15 +400,19 @@ class MainWidget(QtW.QWidget):
 
         self.first_row_second_col_widget = QtW.QWidget()
         self.first_row_second_col_widget.setLayout(QtW.QHBoxLayout())
-        self.first_row_second_col_widget.layout().addWidget(self.camera_props_control_list)
+        self.first_row_second_col_widget.layout()\
+            .addWidget(self.camera_props_control_list)
         self.first_row_second_col_widget.layout().addSpacing(self.SPACING)
-        self.first_row_second_col_widget.layout().addWidget(self.camera_props_params_form)
+        self.first_row_second_col_widget.layout()\
+            .addWidget(self.camera_props_params_form)
         self.second_col_widget.layout().addWidget(self.first_row_second_col_widget)
 
         self.second_row_second_col_widget = QtW.QWidget()
         self.second_row_second_col_widget.setLayout(QtW.QVBoxLayout())
-        # self.second_row_second_col_widget.layout().addWidget(self.slice_props_control_list)
-        # self.second_row_second_col_widget.layout().addWidget(self.slice_params_form)
+        # self.second_row_second_col_widget.layout()\
+        #     .addWidget(self.slice_props_control_list)
+        # self.second_row_second_col_widget.layout()\
+        #     .addWidget(self.slice_params_form)
         self.second_col_widget.layout().addWidget(self.second_row_second_col_widget)
 
         self.second_col_widget.layout().addWidget(self.save_reset_btn_group)

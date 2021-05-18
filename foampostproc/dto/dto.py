@@ -4,8 +4,11 @@ from bson import ObjectId
 
 
 class FoamCaseDTO(object):
-    def __init__(self, cases_dir: 'CasesDirDTO', camera_props: List['CameraPropsDTO'],
-                 camera_slices: List['SliceDTO'], name, _id=None, ):
+    def __init__(self, cases_dir: 'CasesDirDTO',
+                 camera_props: List['CameraPropsDTO'],
+                 camera_slices: List['SliceDTO'],
+                 name,
+                 _id=None, ):
         if _id is None:
             _id = ObjectId()
         self._id = ObjectId(_id)
@@ -55,8 +58,8 @@ class PointDTO(object):
 
 
 class CameraPropsDTO(object):
-    def __init__(self, focal_point: PointDTO, cam_position: PointDTO, viewangle: int, viewup: PointDTO,
-                 name, _id=None):
+    def __init__(self, focal_point: PointDTO, cam_position: PointDTO,
+                 viewangle: int, viewup: PointDTO, name, _id=None):
         if _id is None:
             _id = ObjectId()
         self._id = ObjectId(_id)
@@ -76,7 +79,8 @@ class CameraPropsDTO(object):
 
 
 class SliceDTO(object):
-    def __init__(self, name, sl_x: PointDTO = None, sl_y: PointDTO = None, sl_z: PointDTO = None, _id=None):
+    def __init__(self, name, sl_x: PointDTO = None,
+                 sl_y: PointDTO = None, sl_z: PointDTO = None, _id=None):
         if _id is None:
             _id = ObjectId()
         self._id = ObjectId(_id)
@@ -94,7 +98,8 @@ class SliceDTO(object):
         return res
 
 
-parse_functions = [FoamCaseDTO.parse, CasesDirDTO.parse, PointDTO.parse, CameraPropsDTO.parse, SliceDTO.parse]
+parse_functions = [FoamCaseDTO.parse, CasesDirDTO.parse,
+                   PointDTO.parse, CameraPropsDTO.parse, SliceDTO.parse]
 
 
 def parse_config_json_hook(dct: Dict):

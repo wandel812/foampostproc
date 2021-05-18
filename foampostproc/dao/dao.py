@@ -83,9 +83,12 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
             obj_dct = self.connection.find_one({"_id": key})
             dao_fact = MongoDaoFactory()
             cases_dir = dao_fact.get_dao(MongoCaseDirDAO).read(obj_dct["cases_dir"])
-            camera_props = [dao_fact.get_dao(MongoCameraPropsDAO).read(prop) for prop in obj_dct["camera_props"]]
-            camera_slices = [dao_fact.get_dao(MongoCameraSliceDAO).read(sl) for sl in obj_dct["camera_slices"]]
-            return FoamCaseDTO(cases_dir, camera_props, camera_slices, obj_dct["name"], obj_dct["_id"])
+            camera_props = [dao_fact.get_dao(MongoCameraPropsDAO).read(prop)
+                            for prop in obj_dct["camera_props"]]
+            camera_slices = [dao_fact.get_dao(MongoCameraSliceDAO).read(sl)
+                             for sl in obj_dct["camera_slices"]]
+            return FoamCaseDTO(cases_dir, camera_props, camera_slices,
+                               obj_dct["name"], obj_dct["_id"])
         except Exception:
             raise RuntimeError("Something went wrong with object reading")
 
@@ -123,7 +126,8 @@ class MongoFoamCaseDAO(MongoAbstractDAO):
             camera_slices_dao = MongoDaoFactory().get_dao(MongoCameraSliceDAO)
             for dto_camera_slice in dto_obj.camera_slices:
                 camera_slices_dao.create(dto_camera_slice)
-            MongoDaoFactory().get_dao(MongoCaseDirDAO).create_or_update(dto_obj.cases_dir)
+            MongoDaoFactory().get_dao(MongoCaseDirDAO) \
+                .create_or_update(dto_obj.cases_dir)
 
 
 class MongoCaseDirDAO(MongoAbstractDAO):
@@ -226,13 +230,14 @@ class MongoCameraSliceDAO(MongoAbstractDAO):
 
     def update(self, dto_obj: SliceDTO):
         try:
-            self.connection.update_one({"_id": str(dto_obj._id)},
-                                       {"$set": {
-                                           "name": dto_obj.name,
-                                           "sl_x": None if dto_obj.sl_x is None else dto_obj.sl_x.__dict__,
-                                           "sl_y": None if dto_obj.sl_y is None else dto_obj.sl_y.__dict__,
-                                           "sl_z": None if dto_obj.sl_z is None else dto_obj.sl_z.__dict__
-                                       }})
+            self.connection.update_one(
+                {"_id": str(dto_obj._id)},
+                {"$set": {
+                    "name": dto_obj.name,
+                    "sl_x": None if dto_obj.sl_x is None else dto_obj.sl_x.__dict__,
+                    "sl_y": None if dto_obj.sl_y is None else dto_obj.sl_y.__dict__,
+                    "sl_z": None if dto_obj.sl_z is None else dto_obj.sl_z.__dict__
+                }})
         except Exception:
             raise RuntimeError("Something went wrong with object updating")
 

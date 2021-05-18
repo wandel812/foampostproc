@@ -49,7 +49,8 @@ class ConfigSectionProxy:
 
     def get_path(self, option: str) -> Path:
         option_path = Path(self.__section_proxy.get(option))
-        use_prefix = self._common_section_config.getboolean(self.USE_PROJ_PREFIX_FOR_PATHS)
+        use_prefix = self._common_section_config.getboolean(
+            self.USE_PROJ_PREFIX_FOR_PATHS)
         return Path(PROJ_DIR) / option_path if use_prefix else option_path
 
     def get_list(self, option: str) -> List[str]:

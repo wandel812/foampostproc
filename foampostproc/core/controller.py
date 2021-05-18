@@ -56,7 +56,8 @@ def handle_cases_item_selection():
 
 
 def handle_generate_button_clicked():
-    Screenshot.take_screenshots(SharedState.case_list, Config.get_section("Paths").get_path("output"))
+    Screenshot.take_screenshots(SharedState.case_list, Config.get_section("Paths")
+                                .get_path("output"))
 
 
 def handle_case_path_field_on_text_changed():
@@ -65,12 +66,13 @@ def handle_case_path_field_on_text_changed():
 
 def handle_camera_props_add_button_clicked():
     case = _get_selected_case()
-    cam_prop = CameraProps(ObjectId(), f"camera{len(case.cam_prop_list) + 1}", Point(0, 0, 0),
-                           Point(0, 0, 0), 0, Point(0, 0, 0))
+    cam_prop = CameraProps(ObjectId(), f"camera{len(case.cam_prop_list) + 1}",
+                           Point(0, 0, 0), Point(0, 0, 0), 0, Point(0, 0, 0))
     case.cam_prop_list.append(cam_prop)
     SharedState.m_widget.camera_props_control_list.list_.addItem(cam_prop.name)
     if len(case.cam_prop_list) - 1 > 0:
-        SharedState.m_widget.camera_props_control_list.list_.setCurrentRow(len(case.cam_prop_list) - 1)
+        SharedState.m_widget.camera_props_control_list.list_\
+            .setCurrentRow(len(case.cam_prop_list) - 1)
 
 
 def handle_camera_props_rm_button_clicked():
@@ -87,7 +89,8 @@ def handle_camera_props_rm_button_clicked():
 
 
 def handle_camera_props_item_selection():
-    # if len(_get_selected_case().slice_list) == 0 or len(_get_selected_case().cam_prop_list) == 0:
+    # if len(_get_selected_case().slice_list) == 0 or len(_get_selected_case()\
+    # .cam_prop_list) == 0:
     #     return
 
     cam_prop = _get_selected_cam_prop()
@@ -110,11 +113,13 @@ def handle_camera_props_item_selection():
 
 def handle_slice_props_add_button_clicked():
     case = _get_selected_case()
-    cam_slice = CameraSlice(ObjectId(), f"slice{len(case.slice_list) + 1}", None, None, None)
+    cam_slice = CameraSlice(ObjectId(), f"slice{len(case.slice_list) + 1}",
+                            None, None, None)
     case.slice_list.append(cam_slice)
     SharedState.m_widget.slice_props_control_list.list_.addItem(cam_slice.name)
     if len(case.slice_list) - 1 > 0:
-        SharedState.m_widget.slice_props_control_list.list_.setCurrentRow(len(case.slice_list) - 1)
+        SharedState.m_widget.slice_props_control_list.list_.setCurrentRow(
+            len(case.slice_list) - 1)
 
 
 def handle_slice_props_rm_button_clicked():
@@ -213,7 +218,8 @@ def handle_save_db_btn():
     cases = SharedState.case_list
     for case in cases:
         handle_save_btn()
-        MongoDaoFactory().get_dao(MongoFoamCaseDAO).create_or_update(Mapper.map_foam_case_to_dto(case))
+        MongoDaoFactory().get_dao(MongoFoamCaseDAO)\
+            .create_or_update(Mapper.map_foam_case_to_dto(case))
 
     for case in SharedState.cases_for_del:
         MongoDaoFactory().get_dao(MongoFoamCaseDAO).delete(str(case.idn))
@@ -240,10 +246,12 @@ def _get_selected_case():
 
 
 def _get_selected_cam_prop_row():
-    selected_item = SharedState.m_widget.camera_props_control_list.list_.selectedItems()
+    selected_item = SharedState.m_widget.camera_props_control_list.list_\
+        .selectedItems()
     if not selected_item:
         return None
-    return SharedState.m_widget.camera_props_control_list.list_.row(selected_item[0])
+    return SharedState.m_widget.camera_props_control_list\
+        .list_.row(selected_item[0])
 
 
 def _get_selected_cam_prop():

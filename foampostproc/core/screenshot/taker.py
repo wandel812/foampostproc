@@ -20,12 +20,16 @@ class Screenshot:
                 view.ViewTime = max(foamcase.TimestepValues)
                 for j, cam_prop in enumerate(foam_case.cam_prop_list):
                     camera = view.GetActiveCamera()
-                    camera.SetFocalPoint(cam_prop.focal_point.x, cam_prop.focal_point.y, cam_prop.focal_point.z)
-                    camera.SetPosition(cam_prop.cam_position.x, cam_prop.cam_position.y, cam_prop.cam_position.z)
-                    camera.SetViewUp(cam_prop.viewup.x, cam_prop.viewup.y, cam_prop.viewup.z)
+                    camera.SetFocalPoint(cam_prop.focal_point.x, cam_prop.focal_point.y,
+                                         cam_prop.focal_point.z)
+                    camera.SetPosition(cam_prop.cam_position.x, cam_prop.cam_position.y,
+                                       cam_prop.cam_position.z)
+                    camera.SetViewUp(cam_prop.viewup.x, cam_prop.viewup.y,
+                                     cam_prop.viewup.z)
                     camera.SetViewAngle(cam_prop.viewangle)
 
                     display = Show(foamcase, view)
                     ColorBy(display, ('POINTS', 'U'))
                     display.RescaleTransferFunctionToDataRange(True)
-                    SaveScreenshot(str(out / f"view-{foamcase_path.name}-{i}-{j}.png"), view)
+                    SaveScreenshot(str(out / f"view-{foamcase_path.name}-{i}-{j}.png"),
+                                   view)

@@ -11,8 +11,6 @@ from foampostproc.dao.daofactory import MongoDaoFactory
 from foampostproc.utils import FileHandling, SharedState
 from foampostproc.dto.modelmapper import Mapper
 
-# https://docs.paraview.org/en/v5.8.1/UsersGuide/displayingData.html?highlight=slice#slice-view
-
 WINDOW_X = Config.get_section("ViewProperties").get_int("window_x")
 WINDOW_Y = Config.get_section("ViewProperties").get_int("window_y")
 WINDOW_W = Config.get_section("ViewProperties").get_int("window_w")
@@ -22,7 +20,8 @@ TEST_DATA_PATH = Config.get_section("Paths").get_path("test_data")
 
 
 def __run0():
-    case_dto = FileHandling.read_json(TEST_DATA_PATH, object_hook_=dto.parse_config_json_hook)
+    case_dto = FileHandling.read_json(TEST_DATA_PATH,
+                                      object_hook_=dto.parse_config_json_hook)
 
 
 def __run1():
