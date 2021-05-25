@@ -149,8 +149,8 @@ class PointTextEdit(QtW.QWidget):
 class CameraParamsForm(QtW.QWidget):
     POSITION_FIELD_TEXT = "         Позиция"
     FOCAL_POINT_FIELD_TEXT = "Точка фокуса"
-    VIEW_ANGLE_FIELD_TEXT = "  Угол обзора"
-    VIEW_UP_TEXT = "Наклон"
+    VIEW_ANGLE_FIELD_TEXT = "Верх графика"
+    VIEW_UP_TEXT = "Приближение"
 
     SPACING = 4
 
